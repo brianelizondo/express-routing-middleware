@@ -27,4 +27,15 @@ router.get('/:name', (req, res) => {
     res.json({ item: foundItem });
 });
 
+// PATCH /items/:name, this route should modify a single item’s name and/or price
+router.patch('/:name', (req, res) => {
+    const foundItem = items.find(item => item.name === req.params.name);
+    if(foundItem === undefined){
+        throw new ExpressError("Item not found", 404);
+    }
+    foundItem.name = req.body.name;
+    foundItem.price = req.body.price ? req.body.price : foundItem.price;
+    res.json({ item: foundItem });
+});
+
 module.exports = router;

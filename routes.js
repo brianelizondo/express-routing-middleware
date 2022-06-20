@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
         "price": req.body.price
     };
     items.push(newItem);
-    res.status(201).json({ newItem });
+    res.status(201).json({ item: newItem });
 });
 
 // GET /items/:name - this route should display a single item’s name and price
@@ -40,8 +40,8 @@ router.patch('/:name', (req, res) => {
 
 // DELETE /items/:name - this route should allow you to delete a specific item from the array
 router.delete('/:name', (req, res) => {
-    const foundItem = items.find(item => item.name === req.params.name);
-    if(foundItem === undefined){
+    const foundItem = items.findIndex(item => item.name === req.params.name);
+    if(foundItem === -1){
         throw new ExpressError("Item not found", 404);
     }
     items.splice(foundItem, 1);

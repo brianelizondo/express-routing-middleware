@@ -5,11 +5,9 @@ app.use(express.urlencoded({ extended: true }));
 
 const ExpressError = require('./expressError');
 const itemsRoutes = require('./routes')
-let cats = require('./fakeDb'); 
 
 // routes for items
 app.use('/items', itemsRoutes);
-
 
 
 // 404 handler
